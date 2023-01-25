@@ -1,0 +1,59 @@
+.main{
+
+    position: relative;
+    }
+.bgimg{
+    height: 90vh;
+    width: 100%;
+    object-fit: cover;
+    /* position: absolute; */
+}
+
+.text{
+    position: absolute;
+    color: var(--bg);
+    text-align: center;
+    z-index: 0;
+    left: 20%;
+    transition: 200ms;
+    top:36vh;
+}
+.title{
+    font-size: 50px;
+    text-align: center;
+
+}
+@media screen and (max-width: 1300px) {
+    .text{
+        left: 50%;
+        translate: -50% 0;
+        top: 20vh;
+    }
+    .btn{
+        left: 50%;
+        translate: -50% 0;
+        
+
+    }
+}
+
+.desc{
+
+}
+.btn{
+    color: var(--bgd);
+    z-index: 1;
+    position: absolute;
+    top: 40vh;
+    right: 30%;
+    font-size: 22px;
+    cursor: pointer;
+    width: max-content;
+    font-weight: bold;
+    background-color: var(--pr);
+    padding: 14px 43px 14px 43px;
+    transition: 200ms ease-in-out;
+}
+.btn:active{
+    transform: scale(1.005);
+}

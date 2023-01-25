@@ -1,0 +1,20 @@
+.left , .right{
+display:flex;
+flex-direction: column;
+align-items: center;
+padding: 10px;
+}
+.menu{
+    padding: 4px;
+    cursor: pointer;
+}
+.main{
+    background-color: var(--bgd);
+    color: var(--bg);
+    margin: 0;
+    width: 100vw;
+    
+}
+.end{
+    text-align: center;
+}

@@ -1,0 +1,73 @@
+.BloglistWrap{
+  background-color: #46464614;
+  padding: 30px;
+}
+.card {
+  height: max-content;
+  width: calc(50% - 50px);
+  margin: 25px 0 0 0;
+  background-color: #46464614;
+  
+  flex-shrink: 1;
+  padding: 30px;
+  border-radius: 8px;
+  transition: 100ms;
+}
+.cardGroup {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: 2s;
+}
+.title {
+  font-size: x-large;
+  font-weight: 700;
+}
+.desc {
+  overflow: hidden !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow-y: hidden;
+}
+.more {
+  display: flex;
+  flex-grow: 1;
+  max-height: 100%;
+  align-items: end;
+  justify-content: space-between;
+  font-weight: 600;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.date {
+  overflow: visible;
+}
+.wrap {
+  background-color: white;
+box-shadow: 0px 0px 3px 3px rgba(120, 140, 198, 0.368)inset;
+
+  padding: 20px;
+  border-radius: 8px;
+}
+.readmore{
+    cursor: pointer;
+}
+.seeall{
+   cursor: pointer;
+}
+@media screen and (max-width: 1200px) {
+  .card{
+    width: 100%;
+  }
+  
+}

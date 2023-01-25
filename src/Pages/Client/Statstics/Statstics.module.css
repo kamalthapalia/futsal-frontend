@@ -1,0 +1,64 @@
+.sectionMain {
+  background-color: #46464614;
+  padding: 30px;
+}
+.main {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+.card {
+  background-color: var(--bgd);
+  color: white;
+  /* flex-grow: 1; */
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  gap: 30px;
+  margin: 10px 0;
+}
+.cardTitle {
+  font-weight: 700;
+  font-size: large;
+}
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.table{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+.tableRow {
+  display: flex;
+  background-color: #4646463d;
+
+  color: #000;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+.id {
+  width: 20%;
+  text-align: center;
+}
+.date {
+  width: 45%;
+  text-align: center;
+}
+.time {
+  width: 35%;
+  text-align: center;
+}
+.tableHeader{
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+}
+@media screen and (max-width:770px){
+    .table{
+        margin-top: 15px;
+    }
+}

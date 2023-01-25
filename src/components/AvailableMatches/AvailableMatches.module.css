@@ -1,0 +1,108 @@
+.title {
+  font-weight: 600;
+  font-size: 25px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.AvaliableMatchesSection {
+  padding: 30px;
+  background-color: #46464614;
+}
+
+.time {
+  display: flex;
+  background-color: rgb(240 240 240);
+  color: rgb(119, 112, 105);
+  justify-content: space-evenly;
+  padding: 10px 0 10px 0;
+  width: 120px;
+  box-shadow: 0px 0px 4px 2px rgb(173, 173, 173);
+  align-items: center;
+  cursor: not-allowed;
+  border-radius: 8px;
+  transition: 100ms ease-out;
+  text-align: center;
+}
+@media screen and (max-width: 500px) {
+  .time {
+    width: 110px !important;
+  }
+  .title {
+    margin-top: 20px;
+  }
+}
+.header {
+  margin-bottom: 30px;
+  font-weight: 800;
+  text-align: center;
+}
+.available:hover {
+  transform: scale(1.009);
+}
+.calender {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main {
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 2px 2px rgba(209, 208, 208, 0.711) inset;
+
+  border-radius: 10px;
+}
+.bgimg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  top: 0;
+  z-index: -55;
+  opacity: 0.3;
+  background-color: red;
+  overflow: hidden;
+}
+.warn {
+  text-align: center;
+  color: rgb(190, 78, 78);
+  width: 100%;
+  font-size: larger;
+}
+
+.date {
+  background-color: #0080ff;
+  padding: 15px;
+  font-family: "Roboto Mono", monospace;
+  color: #ffffff;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+.date::-webkit-calendar-picker-indicator {
+  background-color: #ffffff;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.available {
+  color: black;
+  cursor: pointer;
+  background-color: #21b92e;
+  color: white;
+  transition: 100ms ease-out;
+}
+.icon {
+  margin: 4px;
+}
+.warn {
+  font-size: 40px;
+}

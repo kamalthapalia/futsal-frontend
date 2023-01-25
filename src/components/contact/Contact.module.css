@@ -1,0 +1,42 @@
+.textarea{
+    width: 100%;
+    padding: 2px 10px;
+}
+.contactSection{
+    padding: 30px;
+    background-color: #f0f5e6;
+}
+.main{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 1px rgb(209, 208, 208)inset;
+}
+.header{
+    font-weight: 800;
+    text-align: center;
+}
+.desc{
+    font-size: large;
+    font-weight: bold;
+    margin: 20px 0px;
+}
+.btn{
+    border:none;
+    padding: 10px;
+    font-weight: 400;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.28);
+    border-radius: 9px;
+    margin-top: 10px;
+    transition: ease-in-out 0.3s;
+
+    margin-bottom: 20px;
+    /* width: */
+    /* height: */
+
+}
+.btn:active{
+    box-shadow: none;
+    transition: ease-in-out 0.3s;
+    transform: scale(0.8);
+}

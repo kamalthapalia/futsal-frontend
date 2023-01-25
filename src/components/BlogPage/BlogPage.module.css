@@ -1,0 +1,13 @@
+.section{
+    background-color: #46464614;
+    padding: 10px 0px;
+}
+.main{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+.thumbnail{
+    width: 100%;
+    height: auto;
+}
