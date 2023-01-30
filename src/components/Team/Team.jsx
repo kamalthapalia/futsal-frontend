@@ -362,7 +362,7 @@ function Team() {
       <CreateTeam />
       <AddMember />
       <EditTeam />
-      <
+      <TeamInfo />
     </React.Fragment>
   );
 }
