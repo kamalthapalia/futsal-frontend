@@ -11,23 +11,23 @@ function LoggedNavbar() {
       <div className="container">
         <div className={style.main}>
           <div className={style.menu}>
-            <NavLink to="/home">
+            <NavLink to="/Home">
               <div className={style.menuitem}>
                 <AiFillHome size={`2em`} />
               </div>
             </NavLink>
 
-            <NavLink to="/stats">
+            <NavLink to="/Stats">
               <div className={style.menuitem}>
                 <ImStatsBars size="2em" />
               </div>
             </NavLink>
-            <NavLink to="/team">
+            <NavLink to="/Team">
               <div className={style.menuitem}>
                 <MdGroups size="2em" />
               </div>
             </NavLink>
-            <NavLink to="/home">
+            <NavLink to="/Home">
               <div className={style.menuitem}>
                 <AiFillSetting size="2em" />
               </div>

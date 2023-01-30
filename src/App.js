@@ -18,6 +18,7 @@ import Statstics from "./Pages/Client/Statstics/Statstics";
 import LoggedNavbar from "./Pages/Client/LoggedNavbar/LoggedNavbar";
 import Dash from "./Pages/Client/Dash/Dash";
 import BlogPage from "./components/BlogPage/BlogPage";
+import Team from "./components/Team/Team";
 
 function App() {
   const [userloginstatus, setUserloginstatus] = useState(false);
@@ -28,7 +29,7 @@ function App() {
       const token = localStorage.getItem("token");
       setFetching(true);
       let response = await fetch(
-        `http://localhost:8000/Client/Dashboard/getPastBookings`,
+        `http://192.168.1.74:8000/Client/Dashboard/getPastBookings`,
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -58,14 +59,15 @@ function App() {
       <Hero />
       <About />
        <Testimonials /> 
+       <Signup />
+       <BlogList />
+       <Statstics />
+       <LoggedNavbar />
+       <BlogPage />
+        <Team />
+      <Footer /> */}
       <Login />
-      <Signup />
-      <BlogList />
-    <Statstics />
-<LoggedNavbar />
-    <Footer /> */}
 
-<BlogPage />
 
         {/* <AvailableMatches /> */}
       </Fragment>
@@ -77,7 +79,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />}>
             <Route path="/" element={<Dash />} />
-            <Route path="/stats" element={<Statstics />} />
+            <Route path="/Team" element={<Team />}></Route>
+            <Route path="/Stats" element={<Statstics />} />
             <Route path="*" element={<Dash />} />
           </Route>
         </Routes>

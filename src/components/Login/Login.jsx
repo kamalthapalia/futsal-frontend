@@ -12,7 +12,7 @@ export const Login = () => {
       password: password,
     };
 
-    await fetch("http://localhost:8000/Client/Auth/Login", {
+    await fetch("http://192.168.1.74:8000/Client/Auth/Login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,20 +34,23 @@ export const Login = () => {
   useEffect(() => {}, [password?.length > 8]);
   return (
     <React.Fragment>
+      <section className={login.section}>
       <div className="container">
-        <div className={`row , ${login.main} `}>
-          <p className="h3" style={{ textAlign: "center" }}>
-            Login to your account.
-          </p>
-          <div className="col-md-3"></div>
+          <div className={login.externalWrap}>
+        <div style={{alignItems: "center"}} className={`row`}>
           <div className="col-md-6">
+            <div className={login.main}>
+          <p className={login.title}>
+            Welcome Back
+          </p>
+          <p className={login.desc}>Please enter your deteils.</p>
             <div className={login.inputMain}>
-              <label
+              <div
                 htmlFor="username"
-                style={{ textAlign: "left", width: "75%" }}
+                className={login.inputTitle}
               >
                 Enter your username
-              </label>
+              </div>
               <input
                 className={login.input}
                 name="nusername"
@@ -60,12 +63,12 @@ export const Login = () => {
               ></input>
             </div>
             <div className={login.inputMain}>
-              <label
+              <div
                 htmlFor="password"
-                style={{ textAlign: "left", width: "75%" }}
+                className={login.inputTitle}
               >
                 Enter your password
-              </label>
+              </div>
               <input
                 className={login.input}
                 name="password"
@@ -79,31 +82,35 @@ export const Login = () => {
             </div>
             <div className={login.btnwrap}>
               <button
-                className={login.btn}
+                className={login.loginBtn}
                 onClick={() => {
                   loginSubmit();
                 }}
               >
-                Submit
+                Login
+              </button>
+              <div className={login.or}><span className={login.orr}>OR</span></div>
+              <button
+                className={login.signupBtn}
+                onClick={() => {
+                  loginSubmit();
+                }}
+              >
+                SignUp
               </button>
             </div>
-            <div className="d-flex justify-content-center">
-              Don't have a account?&nbsp;&nbsp;
-
-                <Link to="/signup">
-              <span className="link-black" style={{ cursor: "pointer", fontWeight: "bold" }}>
-                sign-up
-              </span>
-                </Link>
             </div>
           </div>
-          <div className="col-md-3"></div>
+          <div className="col-md-6">
+            <div className={login.imgwrap}>
+
+            <img className={login.img} src="https://i.ibb.co/dr7k9rn/mstg9e.png" />
+            </div>
+          </div>
         </div>
       </div>
-      <img
-        src="https://images.pexels.com/photos/797900/pexels-photo-797900.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        className={`img-fluid ${login.bgimg}`}
-      />
+      </div>
+      </section>
     </React.Fragment>
   );
 };

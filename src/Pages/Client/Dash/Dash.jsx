@@ -1,7 +1,6 @@
 import React from 'react'
 import AvailableMatches from '../../../components/AvailableMatches/AvailableMatches'
 import wel from './Welcome.module.css'
-import book from './Booking.module.css'
 
 function Welcome(){
   const username = "kamalthapalia";
@@ -18,13 +17,6 @@ function Welcome(){
   )
 }
 
-function Booking(){
-  return(
-    <section className={book.section}>
-      popup
-    </section>
-  )
-}
 
 function Dash() {
   return (

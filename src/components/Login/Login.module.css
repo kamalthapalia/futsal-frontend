@@ -1,40 +1,83 @@
-.input{
-    width: 75%;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid var(--bgd);
-  margin-top: 0px;
-  background-color: rgba(255, 0, 0, 0);
+.input {
+  width: 100%;
+  font-weight: 600;
+  padding: 5px;
 }
-.inputMain{
-    display: flex;
-  margin-top: 20px;
-  flex-direction: column;
-  text-align: left;
-  align-items: center;
+.inputTitle {
+  font-weight: 600;
+  margin-bottom: 8px;
 }
-.btn{
-  padding: 10px 45px 10px 45px;
-  margin-top: 10px;
-  background-color: var(--bgd);
-  color: var(--bg);
-  border: none;
+.inputMain {
+  padding: 10px 0;
 }
-.btnwrap{
-  display: flex;
-  justify-content: center;
+.loginBtn , .signupBtn {
+  padding: 10px;
+  background-color: black;
+  color: white;
+  width: 100%;
+  font-weight: 700;
+  border-radius: 5px;
+  margin: 20px 0;
+  transition: 200ms ease-in-out;
+}
+.loginBtn:active , .signupBtn:active{
+  transform: scale(0.98);
+}
+.section
+{
+  background: url("https://st.depositphotos.com/1162190/2462/i/600/depositphotos_24622155-stock-photo-soccer-ball-stadium-light.jpg");
+  background-size: cover ;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  padding-top: 50px;
 }
 .main{
-  margin-top: 100px ;
-  background-color:rgba(240, 255, 255, 0.613);
-  border-radius: 15px;
-  font-weight: 600;
+  padding: 80px;
 }
-.bgimg{
-  position: absolute;
-  top:0;
+.externalWrap{
+  background-color: rgba(255, 255, 255, 0.537);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  
+
+}
+.img{
   height: 100%;
-  z-index: -55;
-    width: 100%;
-    object-fit: cover;  
+  object-fit: cover;
+}
+.title{
+  font-size: 35px;
+  font-weight: 800;
+  margin-bottom: 0;
+}
+.desc{
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+.signupBtn{
+  background-color: #0A2847;
+}
+.or{
+  position: relative;
+  text-align: center;
+}
+.orr{
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+.imgwrap{
+  background-color: #0a2847e0;
+  height: 640px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+@media screen and (max-width:990px) {
+  .imgwrap{
+    height: 720px;
+  }
+  
 }
