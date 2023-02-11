@@ -3,35 +3,52 @@ import style from "./Team.module.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
+import Loading from "../Loading/Loading";
+import ApiRoute from "../../ApiRoute";
+import Swal from "sweetalert2";
 
 function CreateTeam() {
   const [teamName, setTeamName] = useState("");
   const [teamDesc, setTeamDesc] = useState("");
   const [teamContact, setTeamContact] = useState("");
+  const [loading, setLoading] = useState();
+
+  function CreateSuccess() {
+    Swal.fire("Team Successfully Created").then((e) => {
+      if (e.isConfirmed) {
+        window.location.reload();
+      }
+    });
+  }
 
   async function createTeam() {
     const token = localStorage.getItem("token");
+    setLoading(true);
+    let res = await fetch(`${ApiRoute}Client/Dashboard/createTeam`, {
+      method: "POST",
 
-    let res = await fetch(
-      `http://192.168.1.74:8000/Client/Dashboard/createTeam`,
-      {
-        method: "POST",
-
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          TeamName: teamName,
-          TeamContact: teamContact,
-          TeamDescription: teamDesc,
-        }),
-      }
-    );
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        TeamName: teamName,
+        TeamContact: teamContact,
+        TeamDescription: teamDesc,
+      }),
+    });
+    setLoading(false);
     let data = await res.json();
-    console.log(data);
-  }
+    CreateSuccess();
+    setTeamName();
+    setTeamContact();
+    setTeamDesc();
 
+    if (data.code === 200) {
+    }
+  }
+  if (loading) return <Loading />;
   return (
     <section className={style.section}>
       <div className="container">
@@ -101,40 +118,86 @@ function CreateTeam() {
   );
 }
 
+function ShowActiveTeams() {
+  const [activeTeam, setActiveTeam] = useState();
+  const token = localStorage.getItem("token");
+
+  async function getActiveTeams() {
+    const response = await fetch(`${ApiRoute}Client/Dashboard/getActiveTeams`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    const resData = await response.json();
+    console.log(resData);
+    setActiveTeam(resData);
+  }
+  useEffect(() => {
+    getActiveTeams();
+  }, []);
+
+  return (
+    <div className={style.mainWrap}>
+      <div className={style.Title}>Teams Active For Challenges</div>
+      <div className={style.ActiveTeamsWrp}>
+        <div className={style.activeTeamsCard}>
+          <div className={style.activeTeamTitle}>Niga team</div>
+          <div className={style.activeTeamContact}>9817070845</div>
+          <div className={style.activeTeamDesc}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor vitae
+            sit explicabo iure perferendis neque in voluptatem sed iste
+            repellendus unde modi, officiis hic fugiat, tempore obcaecati
+            laudantium minus quod!
+          </div>
+        </div>
+      </div>
+      <hr />
+    </div>
+  );
+}
+
 function AddMember() {
   const [playerName, setPlayerName] = useState("");
   const [playerContact, setPlayerContact] = useState("");
-
+  const [loading, setLoading] = useState();
+  function success(inp) {
+    Swal.fire({
+      icon: "success",
+      title: inp.msg,
+    });
+  }
+  function failed(inp) {
+    Swal.fire({
+      icon: "error",
+      title: inp.msg,
+    });
+  }
   async function AddPlayer() {
     const token = localStorage.getItem("token");
+    setLoading(true);
+    let res = await fetch(`${ApiRoute}Client/Dashboard/AddPlayer`, {
+      method: "POST",
 
-    let res = await fetch(
-      `http://192.168.1.74:8000/Client/Dashboard/AddPlayer`,
-      {
-        method: "POST",
-
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        TeamMembers: {
+          MemberName: playerName,
+          MemberPhone: playerContact,
         },
-        body: JSON.stringify({
-          TeamMembers: {
-            MemberName: playerName,
-            MemberPhone: playerContact,
-          },
-        }),
-      }
-    );
-    let data = await res.json();
+      }),
+    });
+    setLoading(false);
+    let resData = await res.json();
+    resData?.code === 200 ? success(resData) : failed(resData);
 
-    function alertt() {
-      window.location.reload();
-      alert(data.msg);
-    }
-
-    data.code === 200 ? alertt() : alert(data.msg);
+    setPlayerName();
+    setPlayerContact();
   }
-
+  if (loading) return <Loading />;
   return (
     <section className={style.section}>
       <div className={`container`}>
@@ -183,32 +246,39 @@ function AddMember() {
 }
 
 function EditTeam() {
-  const [teamName, setTeamName] = useState("");
-  const [teamDesc, setTeamDesc] = useState("");
-  const [teamContact, setTeamContact] = useState("");
+  const [teamName, setTeamName] = useState();
+  const [teamDesc, setTeamDesc] = useState();
+  const [teamContact, setTeamContact] = useState();
+  const [loading, setLoading] = useState();
 
   async function updateTeam() {
     const token = localStorage.getItem("token");
+    setLoading(true);
+    let res = await fetch(`${ApiRoute}Client/Dashboard/UpdateTeam`, {
+      method: "POST",
 
-    let res = await fetch(
-      `http://192.168.1.74:8000/Client/Dashboard/UpdateTeam`,
-      {
-        method: "POST",
-
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          TeamName: teamName,
-          TeamContact: teamContact,
-          TeamDescription: teamDesc,
-        }),
-      }
-    );
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        TeamName: teamName,
+        TeamContact: teamContact,
+        TeamDescription: teamDesc,
+      }),
+    });
+    setLoading(false);
     let data = await res.json();
     console.log(data);
+    Swal.fire({
+      icon: data.code === 200 ? "success" : "error",
+      title: data.msg,
+    });
+    setTeamContact();
+    setTeamDesc();
+    setTeamName();
   }
+  if (loading) return <Loading />;
 
   return (
     <section className={style.section}>
@@ -260,7 +330,7 @@ function EditTeam() {
                 }}
                 className={style.submit}
               >
-                Create team
+                Update Team
               </button>
             </div>
           </div>
@@ -272,82 +342,203 @@ function EditTeam() {
 
 function TeamInfo() {
   const [teamInfo, setTeamInfo] = useState();
+  const [teamActiveStatus, setTeamActiveStatus] = useState();
   const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState();
 
   async function getTeam() {
-    let response = await fetch(
-      `http://192.168.1.74:8000/Client/Dashboard/getMyTeams`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
+    setLoading(true);
+    let response = await fetch(`${ApiRoute}Client/Dashboard/getMyTeams`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    setLoading(false);
     const data = await response.json();
     setTeamInfo(data);
   }
 
   async function deleteTeamMember(userid) {
+    const response = await fetch(`${ApiRoute}Client/Dashboard/DeletePlayer`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + token,
+
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        TeamMembers: {
+          _id: `${userid}`,
+        },
+      }),
+    });
+    const resData = await response.json();
+    Swal.fire({
+      icon: "success",
+      title: "inp.msg",
+    });
+    if (resData.code === 200) {
+      Swal.fire({
+        icon: "success",
+        title: "Player deleted successfully.",
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Player not deleted!",
+      });
+    }
+    getTeam();
+  }
+
+  async function getTeamActiveStatus(userid) {
     const response = await fetch(
-      `http://192.168.1.74:8000/Client/Dashboard/DeletePlayer`,
+      `${ApiRoute}Client/Dashboard/SetTeamActive?action=status`,
       {
-        method: "DELETE",
+        method: "PUT",
         headers: {
           Authorization: "Bearer " + token,
-
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          TeamMembers: {
-            _id: `${userid}`,
-          },
-        }),
       }
     );
     const resData = await response.json();
-    resData?.code == 200
-      ? alert("Player Deleted Successfully")
-      : alert("Failed to delete the player.");
-    getTeam();
+    setTeamActiveStatus(resData?.isActive);
   }
 
   useEffect(() => {
     getTeam();
-    console.log(teamInfo);
+    getTeamActiveStatus();
   }, []);
+
+  async function deleteTeam() {
+    const response = await fetch(
+      `${ApiRoute}Client/Dashboard/DeleteTeam`,
+
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    const resData = await response.json();
+    alert(resData.msg);
+    window.location.pathname = window.location.pathname;
+  }
+
+  const confirmx = () => {
+    if (window.confirm("are you sure?") == true) {
+      deleteTeam();
+    } else {
+      alert("team not deleted");
+    }
+  };
+
+  async function toggleActiveStatus() {
+    const response = await fetch(`${ApiRoute}Client/Dashboard/SetTeamActive`, {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + token,
+
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        TeamActiveForChallange: !teamActiveStatus,
+      }),
+    });
+    let resData = await response.json();
+    console.log(resData);
+    Swal.fire({
+      icon: "success",
+      title: resData.msg,
+    });
+    getTeamActiveStatus();
+  }
+
+  if (loading) return <Loading />;
   return (
     <React.Fragment>
       <section className={style.section}>
         <div className="container">
-          <div className={style.main}>
+          <div className={style.infowrap}>
+            <ShowActiveTeams />
             <div className={style.contentt}>
-              <div className={style.TeamTitle}>{teamInfo?.TeamName}</div>
-              <div className={style.TeamContact}>{teamInfo?.TeamContact}</div>
-              <div className={style.TeamDesc}>{teamInfo?.TeamDescription}</div>
-              <div className={style.playerDetails}>
-                <div className={`${style.playerRow} ${style.playerRowHeader}`}>
-                  <div className={style.sn}>SN</div>
-                  <div className={style.name}>Name</div>
-                  <div className={style.phoneno}>Contact</div>
-                  <div className={`${style.more} ${style.moreHeader}`}>
-                    more
+              <div className="row">
+                <div className="col-sm-9">
+                  <div className={style.TeamTitle}>My Team:</div>
+                  <div className={style.TeamTitle}>{teamInfo?.TeamName}</div>
+                  <div className={style.TeamContact}>
+                    {teamInfo?.TeamContact}
+                  </div>
+                  <div className={style.TeamDesc}>
+                    {teamInfo?.TeamDescription}
                   </div>
                 </div>
-                {teamInfo?.TeamMembers?.map((mem, index) => (
-                  <div className={style.playerRow}>
-                    <div className={style.sn}>{parseInt(index) + 1}</div>
-                    <div className={style.name}>{mem.MemberName}</div>
-                    <div className={style.phoneno}>{mem.MemberPhone}</div>
-                    <div className={style.more}>
-                      <MdDelete
-                        onClick={() => {
-                          deleteTeamMember(mem._id);
-                        }}
-                        size="2em"
-                      />
+                <div className="col-sm-3">
+                  <div className={style.activeSettings}>
+                    <div className={style.act}>Open for Challanges??</div>
+                    <div className={style.blah}>
+                      Currently : {teamActiveStatus ? "Active" : "Not Active"}{" "}
                     </div>
+                    <button onClick={toggleActiveStatus} className={style.btnn}>
+                      {!teamActiveStatus ? "Enable" : "Disable"}
+                    </button>
                   </div>
-                ))}
+                </div>
+              </div>
+
+              <table className={`table , ${style.tableMain}`}>
+                <thead className={`thead-dark ${style.tableHead}`}>
+                  <tr>
+                    <th scope="col">Sn</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">More</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {teamInfo?.TeamMembers.map((player, index) => (
+                    <tr>
+                      <th scope="row">{index + 1}</th>
+                      <td className={style.tableInfo}>{player.MemberName}</td>
+                      <td className={style.tableInfo}>{player.MemberPhone}</td>
+                      <td className={style.tableInfo}>
+                        <MdDelete
+                          size={`1.5em`}
+                          onClick={() => {
+                            deleteTeamMember(player._id);
+                          }}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {teamInfo?.TeamMembers.length < 1 && (
+                <div
+                  style={{ textAlign: "center", color: "red", width: "100%" }}
+                >
+                  No members, Add some to see their details.
+                </div>
+              )}
+            </div>
+            <div className={style.moreSection}>
+              <div className={style.btnGrp}>
+                <Link className={style.btnLink} to="/AddMember">
+                  <button className={style.TeamSettingBtn}>Add Member</button>
+                </Link>
+
+                <Link className={style.btnLink} to="/EditTeaminfo">
+                  <button className={style.TeamSettingBtn}>Edit Info</button>
+                </Link>
+
+                <button
+                  onClick={confirmx}
+                  className={`${style.btnLink} , ${style.TeamSettingBtn}`}
+                >
+                  Delete Team
+                </button>
               </div>
             </div>
           </div>
@@ -356,15 +547,31 @@ function TeamInfo() {
     </React.Fragment>
   );
 }
+
 function Team() {
+  const [hasTeam, setHasTeam] = useState(false);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    getTeam();
+  }, []);
+
+  async function getTeam() {
+    const token = localStorage.getItem("token");
+
+    let response = await fetch(`${ApiRoute}Client/Dashboard/getMyTeams`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    const data = await response.json();
+    setLoading(false);
+    data?.TeamName ? setHasTeam(true) : setHasTeam(false);
+  }
+
+  if (loading) return <Loading />;
   return (
-    <React.Fragment>
-      <CreateTeam />
-      <AddMember />
-      <EditTeam />
-      <TeamInfo />
-    </React.Fragment>
+    <React.Fragment>{hasTeam ? <TeamInfo /> : <CreateTeam />}</React.Fragment>
   );
 }
 
-export default Team;
+export { CreateTeam, AddMember, EditTeam, TeamInfo, Team };

@@ -5,7 +5,7 @@
 .main {
   background-color: white;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 10px 0;
 }
 .card {
@@ -13,7 +13,7 @@
   color: white;
   /* flex-grow: 1; */
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 5px;
   display: flex;
   gap: 30px;
   margin: 10px 0;
@@ -27,19 +27,7 @@
   justify-content: center;
   align-items: center;
 }
-.table{
-    max-height: 400px;
-    overflow-y: scroll;
-}
-.tableRow {
-  display: flex;
-  background-color: #4646463d;
 
-  color: #000;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 10px;
-}
 .id {
   width: 20%;
   text-align: center;
@@ -52,13 +40,160 @@
   width: 35%;
   text-align: center;
 }
-.tableHeader{
-    font-size: large;
-    font-weight: bold;
-    text-align: center;
+
+@media screen and (max-width: 770px) {
+  .table {
+    margin-top: 15px;
+  }
 }
-@media screen and (max-width:770px){
-    .table{
-        margin-top: 15px;
-    }
+
+.tableMain {
+  margin-bottom: 30px;
+  background-color: #ffff;
+  margin-top: 20px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.tableHead {
+  background: #0a3453;
+  color: white;
+}
+.matchInfo {
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  color: rgb(217, 82, 82);
+}
+.welMain {
+  background-color: white;
+  padding: 20px 0 5px 0;
+  border-radius: 5px;
+}
+.name {
+  font-size: 35px;
+  font-weight: 800;
+}
+.welcome {
+  font-size: 26px;
+  font-weight: bold;
+}
+.desc1 {
+  font-size: 30px;
+  /* animation: blink 1000ms infinite ; */
+  background-color: #0a3453;
+  color: white;
+  padding: 35px;
+
+  border-radius: 5px;
+}
+.desc {
+  background-color: #0a3453;
+  color: white;
+  margin: 0;
+  padding: 0;
+  padding-top: 15px;
+  border-radius: 5px;
+  animation: blink 9000ms ease-in infinite;
+}
+
+.data {
+  font-weight: 800;
+  color: #ffe2e2;
+}
+.congratulations {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+@media screen and (max-width: 800px) {
+  .congratulations {
+    width: 100%;
+    object-fit: contain;
+  }
+}
+.couponHead {
+  font-weight: 800;
+  font-size: 35px;
+  margin: 5px 0 25px 0;
+  text-align: center;
+}
+tr {
+  font-weight: 700;
+}
+.no {
+  font-weight: 900;
+  font-size: larger;
+  color: rgb(255, 255, 255);
+}
+@keyframes blink {
+  0% {
+    background-color: red;
+  }
+  33% {
+    background-color: rgb(11, 183, 16);
+  }
+  66% {
+    background-color: #a0b10c;
+  }
+  100% {
+    background-color: red;
+  }
+}
+.cupcard {
+  position: relative;
+  background-color: #0a3453;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+.cupcard:hover .cardInternal {
+  opacity: 1;
+}
+.couponCode {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  text-align: center;
+}
+
+.cardInternal {
+  z-index: 5;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: #7a1088;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: 400ms ease-in-out;
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.rev {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.couponCode {
+  justify-content: center;
+  align-items: center;
+}
+
+.couponText,
+.couponCode {
+  font-size: 22px;
+  font-weight: 700;
+}
+.couponExpiry {
+  text-align: center;
+  padding: 5px;
+  margin-top: 30px;
+  font-size: 22px;
+  background-color: #0a3453;
+}
+.tableTitle {
+  font-weight: 800;
+  font-size: 23px;
 }

@@ -10,9 +10,16 @@
   justify-content: center;
   border-radius: 10px;
 }
+.infowrap {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
 
 .playerRow {
   display: flex;
+  align-items: center;
+  font-weight: bold;
   flex-direction: row;
   background-color: rgba(178, 170, 170, 0.508);
   padding: 8px;
@@ -45,6 +52,17 @@
 .TeamTitle {
   font-size: 25px;
   font-weight: 800;
+  text-transform: capitalize;
+  margin: 5px 0;
+}
+.TeamContact {
+  font-weight: bolder;
+  font-size: 21px;
+  margin: 5px 0;
+}
+.TeamDesc {
+  font-weight: 600;
+  margin: 5px 0;
 }
 .title {
   font-weight: 800;
@@ -84,7 +102,7 @@
 .submit:active {
   transform: scale(0.97);
 }
-.contentt{
+.contentt {
   width: 100%;
 }
 @media screen and (max-width: 600px) {
@@ -100,12 +118,108 @@
     padding-right: 4px;
   }
 }
-.playerRowHeader{
+.playerRowHeader {
   background-color: rgb(27, 25, 48);
   color: white;
   font-weight: 800;
   border-radius: 5px;
 }
-.moreHeader{
+.moreHeader {
   cursor: auto;
 }
+
+.TeamSettingBtn {
+  color: white;
+  width: 100%;
+  height: 100%;
+  padding: 8px 0;
+  border: none;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.91);
+}
+
+.btnLink {
+  color: white;
+  width: 33%;
+}
+
+.btnGrp {
+  display: flex;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.tableMain {
+  margin-bottom: 30px;
+  background-color: #ffff;
+  margin-top: 20px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.tableHead {
+  background: #0a3453;
+  color: white;
+}
+.tableInfo {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.activeSettings {
+  display: flex;
+  height: 100%;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+.act {
+  text-align: center;
+  font-weight: 800;
+  font-size: 19px;
+}
+.btnn {
+  color: white;
+  padding: 8px 45px;
+  border: none;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.91);
+}
+.blah {
+  font-weight: 800;
+  padding: 7px 0;
+}
+.activeTeamsCard {
+  padding: 16px;
+  background-color: #8edfa56d;
+  width: 33%;
+  border-radius: 4px;
+  text-align: left;
+  height: 100%;
+}
+.activeTeamTitle {
+  font-weight: 800;
+  padding: 3px 0;
+  font-size: 21px;
+  text-transform: uppercase;
+}
+.activeTeamContact {
+  font-weight: 600;
+  padding: 3px 0;
+  font-size: 19px;
+}
+.activeTeamDesc {
+  font-weight: 600;
+  display: -webkit-box;
+  padding: 3px 0;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.Title {
+  font-weight: 700;
+  font-size: 25px;
+  padding: 0 0 15px 0;
+}
+/***** checkboxx *****/
+
+/***** End checkboxx *****/

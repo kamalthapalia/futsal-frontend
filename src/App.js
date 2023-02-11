@@ -18,37 +18,42 @@ import Statstics from "./Pages/Client/Statstics/Statstics";
 import LoggedNavbar from "./Pages/Client/LoggedNavbar/LoggedNavbar";
 import Dash from "./Pages/Client/Dash/Dash";
 import BlogPage from "./components/BlogPage/BlogPage";
-import Team from "./components/Team/Team";
+import {
+  CreateTeam,
+  AddMember,
+  EditTeam,
+  TeamInfo,
+  Team,
+} from "./components/Team/Team";
+import PaymentPopup from "./components/PaymentPopup/PaymentPopup";
+import ApiRoute from "./ApiRoute";
+import AllBlogs from "./components/AllBlogs/AllBlogs";
 
 function App() {
   const [userloginstatus, setUserloginstatus] = useState(false);
   const [fetching, setFetching] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
+  const [bookDate, setBookDate] = useState({});
+  const [price, setPrice] = useState();
+  const token = localStorage.getItem("token");
+
+  async function getActiveTeams() {
+    const response = await fetch(`${ApiRoute}Client/Dashboard/getActiveTeams`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    const resData = await response.json();
+    resData.code === 900 ? setUserloginstatus(false) : setUserloginstatus(true);
+    setFetching(false);
+  }
 
   useEffect(() => {
-    async function checkUserToken() {
-      const token = localStorage.getItem("token");
-      setFetching(true);
-      let response = await fetch(
-        `http://192.168.1.74:8000/Client/Dashboard/getPastBookings`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      const data = await response.json();
-      data?.code == 400 ? setUserloginstatus(false) : setUserloginstatus(true);
-
-      data?.code == 400
-        ? localStorage.setItem("token", "")
-        : setUserloginstatus(true);
-      setFetching(false);
-    }
-
-    checkUserToken();
+    getActiveTeams();
   }, [userloginstatus]);
 
-  // if (fetching) return <Loading />;
+  if (fetching) return <Loading />;
 
   const test = false;
   if (test)
@@ -59,29 +64,56 @@ function App() {
       <Hero />
       <About />
        <Testimonials /> 
-       <Signup />
        <BlogList />
        <Statstics />
        <LoggedNavbar />
+       <Team />
        <BlogPage />
-        <Team />
+<AllBlogs />
       <Footer /> */}
-      <Login />
-
-
         {/* <AvailableMatches /> */}
+
+        {showPopup && (
+          <PaymentPopup
+            setShowPopup={setShowPopup}
+            bookDate={bookDate}
+            price={price}
+          />
+        )}
+        <AvailableMatches
+          setPrice={setPrice}
+          setBookDate={setBookDate}
+          setShowPopup={setShowPopup}
+        />
       </Fragment>
     );
 
   if (userloginstatus) {
     return (
       <Fragment>
+        {showPopup && (
+          <PaymentPopup
+            setShowPopup={setShowPopup}
+            bookDate={bookDate}
+            price={price}
+          />
+        )}
         <Routes>
           <Route path="/" element={<Dashboard />}>
-            <Route path="/" element={<Dash />} />
+            <Route
+              path="/"
+              element={
+                <Dash
+                  setShowPopup={setShowPopup}
+                  setBookDate={setBookDate}
+                  setPrice={setPrice}
+                />
+              }
+            />
             <Route path="/Team" element={<Team />}></Route>
-            <Route path="/Stats" element={<Statstics />} />
-            <Route path="*" element={<Dash />} />
+            <Route path="/AddMember" element={<AddMember />}></Route>
+            <Route path="/EditTeaminfo" element={<EditTeam />}></Route>
+            <Route path="*" element={<Navigate to="/" />} />
           </Route>
         </Routes>
       </Fragment>
@@ -92,11 +124,18 @@ function App() {
     return (
       <Fragment>
         <Routes>
-          <Route path="/" element={<HomePage loginstatus={userloginstatus} />}>
+          <Route path="/" element={<HomePage />}>
             <Route path="/" element={<Home />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/signup" element={<Signup />}></Route>
-            <Route path="/*" element={<Navigate to="/" />}></Route>
+            <Route
+              path="/Login"
+              element={userloginstatus ? <Navigate to="/" /> : <Login />}
+            ></Route>
+            <Route
+              path="/Signup"
+              element={userloginstatus ? <Navigate to="/" /> : <Signup />}
+            ></Route>
+            <Route path="/Blogs" element={<AllBlogs />}></Route>
+            <Route path="*" element={<Navigate to="/" />}></Route>
           </Route>
         </Routes>
       </Fragment>

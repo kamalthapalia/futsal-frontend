@@ -1,17 +1,20 @@
 import React from "react";
 import style from "./BlogList.module.css";
 import { BiLinkExternal } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 function BlogList() {
   return (
     <section className={style.BloglistWrap}>
       <div className={`container `}>
         <div className={style.wrap}>
-          <div className="d-flex justify-content-md-between">
+          <div className="d-flex justify-content-between">
             <h3>Read latest news</h3>{" "}
-            <h5 className={style.seeall}>
-              <BiLinkExternal size={`1.3em`} /> see all
-            </h5>
+            <Link to="/Blogs">
+            <div className={` h5 ${style.seeall}`}>
+              <BiLinkExternal size={`1.3em`} /> <div>See all</div> 
+            </div>
+            </Link>
           </div>
           <div className={`${style.cardGroup}`}>
             <div className={` ${style["card"]}`}>
@@ -64,6 +67,7 @@ function BlogList() {
                     <div className={style.more}>
                       <div className={style.readmore}>
                         <BiLinkExternal />
+                        <div className={style.readmoree}></div>
                         Read More
                       </div>
                       <div className={style.date}>2022/07/07</div>

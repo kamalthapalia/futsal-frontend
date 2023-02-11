@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ApiRoute from "../../ApiRoute";
 import login from "./Login.module.css";
 
 export const Login = () => {
@@ -12,7 +13,7 @@ export const Login = () => {
       password: password,
     };
 
-    await fetch("http://192.168.1.74:8000/Client/Auth/Login", {
+    await fetch(`${ApiRoute}Client/Auth/Login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -93,7 +94,7 @@ export const Login = () => {
               <button
                 className={login.signupBtn}
                 onClick={() => {
-                  loginSubmit();
+                  window.location.href="/signup"
                 }}
               >
                 SignUp

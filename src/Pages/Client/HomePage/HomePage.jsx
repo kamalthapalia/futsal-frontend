@@ -2,10 +2,10 @@ import React from 'react'
 import Navbar from '../../../components/Navbar/Navbar'
 import { Outlet } from 'react-router-dom'
 
-function HomePage({loginstatus}) {
+function HomePage() {
   return (
     <React.Fragment>
-        <Navbar userloginstatus={loginstatus}/>
+        <Navbar/>
         <Outlet />
 
     </React.Fragment>

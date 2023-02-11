@@ -5,9 +5,10 @@ import "react-calendar/dist/Calendar.css";
 import moment from "moment/moment";
 import { RxCross2 } from "react-icons/rx";
 import { RxCheck } from "react-icons/rx";
+import PaymentPopup from "../PaymentPopup/PaymentPopup";
+import ApiRoute from "../../ApiRoute";
 
-
-function AvailableMatches() {
+function AvailableMatches({ setShowPopup, setBookDate, setPrice }) {
   const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
   const [data, setData] = useState();
   const [value, onChange] = useState(new Date());
@@ -15,13 +16,11 @@ function AvailableMatches() {
   async function getMatches() {
     try {
       let response = await fetch(
-        `http://192.168.1.74:8000/client/Bookings/getAllBookings?date=${date}`
+        `${ApiRoute}client/Bookings/getAllBookings?date=${date}`
       );
-      const fetdata = await response.json();
-      setData(fetdata);
-    } catch {
-      console.log("failed to fetch");
-    }
+      const resData = await response.json();
+      setData(resData);
+    } catch {}
   }
 
   useEffect(() => {
@@ -31,58 +30,99 @@ function AvailableMatches() {
   }, [date]);
 
   const [time, setTime] = useState([
-    "5-6",
-    "6-7",
-    "7-8",
-    "8-9",
-    "9-10",
-    "10-11",
-    "11-12",
-    "12-13",
-    "13-14",
-    "14-15",
-    "15-16",
-    "16-17",
-    "17-18",
-    "18-19",
-    "19-20",
-    "20-21",
+    "5-6 AM",
+    "6-7 AM",
+    "7-8 AM",
+    "8-9 AM",
+    "9-10 AM",
+    "10-11 AM",
+    "11-12 PM",
+    "12-1 PM",
+    "1-2 PM",
+    "2-3 PM",
+    "3-4 PM",
+    "4-5 PM",
+    "5-6 PM",
+    "6-7 PM",
+    "7-8 PM",
+    "8-9 PM",
   ]);
+  useEffect(() => {});
+  // document.querySelector('#avilable').addEventListener("click" ,()=> {
+  //                     setShowPopup(true) ;
+  //                         setBookDate({
+  //                           Date:date,
+  //                           Time:time,
+  //                         })
+  // })
 
   var maxdate = new Date();
-
   maxdate.setDate(maxdate.getDate() + 7);
 
+  function BookingTime(given) {
+    let BTime;
+    data?.Matches?.map((data) => {
+      if (data?.FormattedTime === given) {
+        BTime = data?.BookingTime;
+      }
+    });
+    return BTime;
+  }
+
+  function Price(given) {
+    let price;
+    data?.Matches?.map((data) => {
+      if (data?.FormattedTime === given) {
+        price = data?.GamePrice;
+      }
+    });
+    return price;
+  }
+
+  function checkAvailiblity(avai) {
+    let available = false;
+
+    data?.Matches?.map((data) => {
+      if (data?.FormattedTime === avai) {
+        available = true;
+      }
+    });
+    return available;
+  }
+
   return (
-    <section className={style.AvaliableMatchesSection}>
-      <div className="container">
-        <div className={style.wrap}>
-          <div className={style.main}>
-            <h3 className={`text-center ${style.header}`}>Avaliable Matches</h3>
-            <div className={`row`}>
-              <div className={`col-md-6 , ${style.calender}`}>
-                {/* <input
+    <React.Fragment>
+      <section className={style.AvaliableMatchesSection}>
+        <div className="container">
+          <div className={style.wrap}>
+            <div className={style.main}>
+              <h3 className={`text-center ${style.header}`}>
+                Avaliable Matches
+              </h3>
+              <div className={`row`}>
+                <div className={`col-md-6 , ${style.calender}`}>
+                  {/* <input
               className={style.date}
               onChange={(e) => {
                 setDate(e.target.value);
               }}
               type="date"
             /> */}
-                <Calendar
-                  maxDate={maxdate}
-                  minDate={new Date()}
-                  className={"calender"}
-                  onChange={(value, event) => {
-                    onChange();
-                    setDate(moment(value).format("YYYY-MM-DD"));
-                  }}
-                  value={value}
-                />
-              </div>
-              <div className="col-md-6">
-                <div className={style.title}>{date}</div>
+                  <Calendar
+                    maxDate={maxdate}
+                    minDate={new Date()}
+                    className={"calender"}
+                    onChange={(value, event) => {
+                      onChange();
+                      setDate(moment(value).format("YYYY-MM-DD"));
+                    }}
+                    value={value}
+                  />
+                </div>
+                <div className="col-md-6">
+                  <div className={style.title}>{date}</div>
 
-                {/* <div className={style.content}>
+                  {/* <div className={style.content}>
 
                    {!data?.success?"please select valid date":" "}
 
@@ -93,45 +133,61 @@ function AvailableMatches() {
                 
                 </div> */}
 
-                <div className={style["warn"]}>
-                  {!data?.success ? "please select valid date" : " "}
-                </div>
-                <div className={style["content"]}>
-                  {data?.success && (
-                    <React.Fragment>
-                      {time.map((time) => (
-                        <React.Fragment>
-                          <div
-                            className={
-                              data?.availableTimes?.includes(time)
-                                ? `${style.available} , ${style.time}`
-                                : `${style.time}`
-                            }
-                          >
-                            {data?.availableTimes?.includes(time) && (
-                              <React.Fragment>
-                                <RxCheck />
-                              </React.Fragment>
-                            )}
-                            {!data?.availableTimes?.includes(time) && (
-                              <React.Fragment>
-                                <RxCross2 />
-                              </React.Fragment>
-                            )}
-                            {time}{" "}
-                            {parseInt(time.split("-")[0]) > 11 ? "pm" : "am"}
-                          </div>
-                        </React.Fragment>
-                      ))}
-                    </React.Fragment>
-                  )}
+                  <div className={style["warn"]}>
+                    {!data?.code === 200 ? "please select valid date" : " "}
+                  </div>
+                  <div className={style["content"]}>
+                    {data?.code === 200 && (
+                      <React.Fragment>
+                        {time?.map((time) => (
+                          <React.Fragment>
+                            <div
+                              id={
+                                checkAvailiblity(time)
+                                  ? "available"
+                                  : "notavailable"
+                              }
+                              onClick={(e) => {
+                                if (e.target.id == "available") {
+                                  setShowPopup(true);
+                                  setPrice(Price(time));
+                                  setBookDate({
+                                    Date: date,
+                                    BookingTime: BookingTime(time),
+                                    FormattedTime: time,
+                                  });
+                                }
+                              }}
+                              className={
+                                checkAvailiblity(time)
+                                  ? `${style.available} , ${style.time}`
+                                  : `${style.time}`
+                              }
+                            >
+                              {checkAvailiblity(time) && (
+                                <React.Fragment>
+                                  <RxCheck />
+                                </React.Fragment>
+                              )}
+                              {!checkAvailiblity(time) && (
+                                <React.Fragment>
+                                  <RxCross2 />
+                                </React.Fragment>
+                              )}
+                              {time}{" "}
+                            </div>
+                          </React.Fragment>
+                        ))}
+                      </React.Fragment>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </React.Fragment>
   );
 }
 

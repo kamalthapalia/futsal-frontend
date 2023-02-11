@@ -13,25 +13,19 @@ function LoggedNavbar() {
           <div className={style.menu}>
             <NavLink to="/Home">
               <div className={style.menuitem}>
-                <AiFillHome size={`2em`} />
+                <AiFillHome size="2em" />
+                <div className={style.menuText}>Home</div>
               </div>
             </NavLink>
 
-            <NavLink to="/Stats">
-              <div className={style.menuitem}>
-                <ImStatsBars size="2em" />
-              </div>
-            </NavLink>
+            
             <NavLink to="/Team">
               <div className={style.menuitem}>
                 <MdGroups size="2em" />
+                <div className={style.menuText}>Teams</div>
               </div>
             </NavLink>
-            <NavLink to="/Home">
-              <div className={style.menuitem}>
-                <AiFillSetting size="2em" />
-              </div>
-            </NavLink>
+            
           </div>
         </div>
       </div>

@@ -1,3 +1,9 @@
+.popup1 {
+  position: absolute;
+  z-index: 55;
+  width: 100%;
+}
+
 .title {
   font-weight: 600;
   font-size: 25px;
@@ -96,7 +102,7 @@
 .available {
   color: black;
   cursor: pointer;
-  background-color: #21b92e;
+  background-color: #2138b9;
   color: white;
   transition: 100ms ease-out;
 }

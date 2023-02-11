@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import style from './Hero.module.css'
 
 function Hero() {
@@ -13,7 +14,9 @@ function Hero() {
             <div className={style.title}>Gamasta</div>
             <div className={style.desc}>we provide best service internationally....</div>
           </div>
-          <div className={style.btn}>Book your match now</div>
+          <Link to="/login">
+            <div className={style.btn}>Book your match now</div>
+          </Link>
 
             <img src={bgimg} className={`img-fluid ${style.bgimg}`} />
     </div>

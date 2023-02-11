@@ -1,45 +1,41 @@
-:root{
-    
-    
-    --pr: #FFB600;
-    /* --sec:; */
-    --ac:#216dc394;
-    /* --acd:; */
-    --bg:#E8EAE3;
-    --bgd: #141824;
-    --suc:#63A47B;
-    --danger: #93344A;
+:root {
+  --pr: #ffb600;
+  /* --sec:; */
+  --ac: #216dc394;
+  /* --acd:; */
+  --bg: #e8eae3;
+  --bgd: #141824;
+  --suc: #63a47b;
+  --danger: #93344a;
 }
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-*{
-    padding: 0;
-    font-family: 'Lato', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  padding: 0;
+  font-family: "Lato", sans-serif;
   margin: 0;
-    /* border: 1px solid red; */
-    overflow-x: hidden;
+  /* border: 1px solid red; */
 }
-.scrolled{
-    background-color: var(--bgd);
-    color: var(--bg) !important;
+.scrolled {
+  background-color: var(--bgd);
+  color: var(--bg) !important;
 }
-.shownav{
-    translate: 0 0 !important;
+.shownav {
+  translate: 0 0 !important;
 }
-body{
-
-    background-color: var(--bg);
-
+body {
+  background-color: var(--bg);
 }
-a , a:hover{
-    text-decoration: none;
-    color: white;
+a,
+a:hover {
+  text-decoration: none;
+  color: white;
 }
-.link-black{
-    color: black;
+.link-black {
+  color: black;
 }
-.calender{
-    width: 100% !important;
+.calender {
+  width: 100% !important;
 }
 .formBlock {
-    display: block;
-  }
+  display: block;
+}
